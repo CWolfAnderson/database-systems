@@ -1,0 +1,65 @@
+1. 
+players ( id, name, position, jersey_number ) 
+	FD(s): 	{id} → {name, position, jersey_number} 
+		      {jersey_number} → {name, position} 
+	Key(s): {id}, {jersey_number} 
+	BCNF: yes 
+games ( id, date, opponent, team_score, opponent_score, home_or_away ) 
+	FD(s): 	{id} → {date, opponent, team_score, opponent_score, home_or_away} 
+		      {date, opponent} → {team_score, opponent_score, home_or_away} 
+	Key(s): {id}, {date, opponent} 
+	BCNF: yes 
+stats ( id, points, rebounds, assists, minutes_played, game_id ) 
+  FD(s): {id} → {points, rebounds, assists, minutes_played, game_id} 
+  Key(s): {id} 
+  BCNF: yes 
+index ( id, player_id, stat_id, game_id ) 
+  FD(s):  {id} → {player_id, stat_id, game_id} 
+          {player_id, game_id} → {stat_id} 
+          {game_id, stat_id} → {player_id} 
+          {stat_id, player_id} → {game_id} 
+  Key(s): {id}, {player_id, game_id}, {game_id, stat_id} 
+  BCNF: no 
+contracts ( id, player_id, start_date, end_date ) 
+  FD(s): {id} → {player_id, start_date, end_date} 
+  Key(s): {id} 
+  BCNF: yes 
+10_day_contracts ( id, contract_id, amount ) 
+  FD(s):  {id} → {contract_id, amount} 
+  Key(s): {id} 
+  BCNF: yes 
+regular_contracts ( id, contract_id, number_of_years ) 
+  FD(s): {id} → {contract_id, number_of_years} 
+  Key(s): {id} 
+  BCNF: yes 
+salaries ( id, regular_contract_id, amount, year ) 
+  FD(s): {id} → {regular_contract_id, amount, year} 
+  Key(s): {id} 
+  BCNF: yes 
+bonuses ( id, regular_contract_id, amount, description ) 
+  FD(s): {id} → {regular_contract_id, amount, description} 
+  Key(s): {id} 
+  BCNF: yes 
+
+2. 
+states ( name, region ) 
+  FD(s): {name} → {region} Key(s): {name} 
+  BCNF: yes congress_people ( id, name, district, party, start_date, state_name ) 
+  FDs: {id} → {name, district, party, start_date, state_name} 
+  Key(s): {id} 
+  BCNF: yes 
+bills ( id, name, result, date_of_vote ) 
+  FDs: {id} → {name, result, date_of_vote} 
+  Key(s): {id} 
+  BCNF: yes 
+votes ( id, bill_id, congress_person_id, vote ) 
+  FDs: {id} → {bill_id, congress_person_id, vote} 
+      {bill_id, congress_person_id} → {vote} 
+  Key(s): {id}, {bill_id, congress_person_id}
+  BCNF: yes 
+sponsors ( id, congress_person_id, bill_id ) 
+  FDs: {id} → {congress_person_id, _bill_id} 
+  Key(s): {id} 
+  BCNF: yes
+
+
